@@ -1,0 +1,64 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="row mb-2" style="margin-top: 10px;">
+        <div class="col-md-1 col-lg-1">
+            <img src="{% static '/images/icons8-student-64.png' %}" alt="" class="rounded-circle" style="width: auto;">   
+        </div>
+        <div class="col-md-11 col-lg-11 d-flex justify-content-between align-items-center">
+            <span class="h3">Students</span>
+        </div>
+    </div>
+    <div class="row">
+        <hr width="100%" align="center" size="5px" style="background-color: #CC00CC;"/>
+    </div>
+</div>
+<div class="row">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-auto">
+                <input class="form-control" type="text" name="keyword" value="{{ keyword | default:'' }}" placeholder="Enter here"
+                  style="margin-top:10px" />
+            </div>
+            <div class="col-auto">
+                <input class="btn" style="margin-top:10px" type="image" src="{% static '/images/icons8-search-24.png' %}" alt="submit" />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Avatar</th>
+                <th>Code</th>
+                <th>Full name</th>
+                <th>
+                    <a href="{% url 'create' %}" class="btn">
+                        <img src="{% static '/images/icons8-add-new-30.png' %}" alt="">
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr style="vertical-align: middle">
+                <td><img src="{{ student.avatar }}" alt="Khong co hinh anh" width="80px" height="80px"></td>
+                <td>{{ student.code }}</td>
+                <td>{{ student.fullname }}</td>
+                <td>
+                    <a href="{% url 'update' student.id %}" class="btn btn-primary">
+                        <img src="{% static '/images/icons8-edit-24.png' %}" alt="">
+                    </a>
+                    <a href="{% url 'delete' student.id %}" class="btn btn-danger">
+                        <img src="{% static '/images/icons8-remove-24.png' %}" alt="">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

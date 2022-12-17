@@ -1,0 +1,11 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <form method="POST">{% csrf_token %}
+        <h3>Do you want to delete the student "{{ student.name }}"?</h3>
+        <input class="btn btn-danger" type="submit" value="Yes"/>
+        <a href="{% url 'student-list' %}" class="btn btn-primary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

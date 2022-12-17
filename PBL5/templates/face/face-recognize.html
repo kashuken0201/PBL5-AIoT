@@ -1,0 +1,84 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="row mb-2" style="margin-top: 10px;">
+        <div class="col-md-1 col-lg-1">
+            <img src="{% static '/images/icons8-face-detection-64.png' %}" alt="" class="rounded-circle" style="width: auto;">   
+        </div>
+        <div class="col-md-11 col-lg-11 d-flex justify-content-between align-items-center">
+            <span class="h3">Face Detection</span>
+        </div>
+    </div>
+    <div class="row">
+        <hr width="100%" align="center" size="5px" style="background-color: #CC00CC;"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6">
+        <div class="row mb-2">
+            <div class="col-md-2 col-lg-2">
+                <img src="{% static '/images/icons8-camera-32.png' %}" alt="">
+            </div>
+            <div class="col-md-10 col-lg-10 d-flex justify-content-between">
+                <span class="h5">Camera</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <img src="" id="stream" width="500px" height="400px">
+        </div>
+        <div class="row mb-2">
+            <div>
+                <button class="btn btn-primary" onclick="stream()">Stream</button>
+                <button class="btn btn-success" onclick="detect()">Detection</button>
+                <button class="btn btn-danger" onclick="capture()">Capture</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function stream() {
+                let src = "{% url 'stream' %}";
+                document.getElementById("stream").src= src;
+            }
+            function detect() {
+                let src = "{% url 'detect' %}";
+                document.getElementById("stream").src= src;
+            }
+            function capture() {
+                let src = "{% url 'capture' %}";
+                document.getElementById("stream").src= src;
+            }
+        </script>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="row mb-2">
+            <div class="col-md-2 col-lg-2">
+                <img src="{% static '/images/icons8-log-32.png' %}" alt="">
+            </div>
+            <div class="col-md-10 col-lg-10 d-flex justify-content-between">
+                <span class="h5">Log</span>
+            </div>
+        </div>
+        <div class="row mb-2" style="font-size: 18px; overflow: auto; max-height: 400px;">
+            <object data="{% url 'log' %}" width="800"
+            height="800"
+            type="text/html" id="log-frame">
+
+            </object>
+            <script>
+                window.setInterval(function() {
+                    reloadIFrame()
+                }, 3000);
+                function reloadIFrame() {
+                    console.log('reloading..');
+                    document.getElementById('log-frame').contentWindow.location.reload();
+                }
+            </script>
+            <!-- {% for log in logs %}
+            <div class="row">
+                {{ log }}
+            </div>
+            {% endfor %} -->
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="row mb-2" style="margin-top: 10px;">
+        <div class="col-md-1 col-lg-1">
+            <img src="{% static '/images/icons8-dashboard-layout-64.png' %}" alt="" class="rounded-circle" style="width: auto;">   
+        </div>
+        <div class="col-md-11 col-lg-11 d-flex justify-content-between align-items-center">
+            <span class="h3">Dashboard</span>
+        </div>
+    </div>
+    <div class="row">
+        <hr width="100%" align="center" size="5px" style="background-color: #CC00CC;"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-5 mb-3 mb-xl-0">
+        <a href="{% url 'introduction' %}" class="text-dark" style="text-decoration: none;">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center border-0" style="background-color: #76d7a7;">
+                    <div class="me-1" style="border-width:2px; border-style:none none solid none; border-color:black;">
+                        <h3 class="h4 m-0">
+                            About Us
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-body py-0" style="height: 150px; max-height: 275px; margin-top: 20px;">
+                    <div class="row" style="margin-top:20px">
+                        <div class='col-3'>
+                            <img class="rounded-circle" src="avatar/phat.jpg" height='60px' width='60px'>
+                        </div>
+                        <div class='col-9'>
+                            <div style='text-align: center; height: 50px; line-height: 50px;'>Trần Tấn Phát</div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:50px">
+                        <div class='col-3'>
+                            <img class="rounded-circle" src="avatar/hoang_he.jpg" height='60px' width='60px'>
+                        </div>
+                        <div class='col-9'>
+                            <div style='text-align: center; height: 50px; line-height: 50px;'>Đoàn Chí Hoàng</div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:50px">
+                        <div class='col-3'>
+                            <img class="rounded-circle" src="avatar/nhan.jpg" height='60px' width='60px'>
+                        </div>
+                        <div class='col-9'>
+                            <div style='text-align: center; height: 50px; line-height: 50px;'>Lê Thành Nhân</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-xl-7">
+        <div class="row">
+            <a href="{% url 'student-list' %}" class="col-sm-6" style="text-decoration: none;">
+                <div class="card text-black overflow-hidden mb-3" style="max-height: 300px;">
+                    <div class="card-header d-flex align-items-center" style="background-color: #d6856c">
+                        <h4 class="h4 m-0" style="border-width:2px; border-style:none none solid none; border-color:black;">
+                            User
+                        </h4>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-start px-2 mb-3" style="margin-top:10px">
+                        <h4 class="h6 m-0">
+                            Total User:
+                        </h4>
+                        <span class="d-block badge bg-primary ms-auto">abc{{ num }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-start px-2">
+                        <h4 class="h6 m-0">
+                            Recent Recognize:
+                        </h4>
+                        <span class="d-block badge bg-success ms-auto">abc{{ num }}</span>
+                    </div>
+                    <div class="py-0" style="height: 165px; margin: 5px 20px 5px;">
+                        {% for log in logs %}
+                            {{ log.student.name }}<br>
+                        {% endfor %}    
+                    </div>
+                </div>
+            </a>
+            <div class="col-sm-6">
+                <div class="card text-black overflow-hidden mb-3" style="max-height: 300px;">
+                    <div class="card-header d-flex align-items-center" style="background-color: #4fb1e8">
+                        <h4 class="h4 m-0" style="border-width:2px; border-style:none none solid none; border-color:black;">
+                            Calendar
+                        </h4>
+                    </div>
+                    <div class="calendar">
+                        <div class="calendar-body">
+                            <span class="month-name">Month</span>
+                            <span class="day-name">Day</span>
+                            <span class="date-number">00</span>
+                            <span class="year">0000</span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        const dayNumber = new Date().getDate();
+                        const year = new Date().getFullYear();
+                        const dayName = new Date().toLocaleString("default", {weekday: "long"});
+                        const monthName = new Date().toLocaleString("default", {month: "long"});
+                        document.querySelector(".month-name").innerHTML = monthName;
+                        document.querySelector(".day-name").innerHTML = dayName;
+                        document.querySelector(".date-number").innerHTML = dayNumber;
+                        document.querySelector(".year").innerHTML = year;
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-black overflow-hidden mb-3" style="height: 200px">
+                    <div class="card-header d-flex align-items-center" style="background-color: #a750d8">
+                        <h4 class="h4 m-0" style="border-width:2px; border-style:none none solid none; border-color:black;">Fan Speed</h4>
+                    </div>
+                    <div class="row" style="margin-top: 35px;">
+                        <div class="col-1"></div>
+                        <div class="col-5">
+                            <div class="h2 fw-normal">
+                                754.9<span class="ms-2 fs-6 align-top">Hz</span>
+                            </div>
+                        </div>
+                        <div class="col-6 text-sm">
+                            <div class="d-flex justify-content-between align-items-start px-2 mb-3">
+                                Min Values
+                                <span class="d-block badge bg-success ms-auto">27</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start px-2">
+                                Max Values
+                                <span class="d-block badge bg-danger ms-auto">89</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-black overflow-hidden mb-3" style="height: 200px">
+                    <div class="card-header d-flex align-items-center" style="background-color: #e94c73">
+                        <h4 class="h4 m-0" style="border-width:2px; border-style:none none solid none; border-color:black;">Sensor Temperature</h4>
+                    </div>
+                    <div class="row" style="margin-top: 35px;">
+                        <div class="col-1"></div>
+                        <div class="col-5">
+                            <div class="h5 display-6 fw-normal">
+                                43.7 <span class="fw-bold fs-5 align-top">°C</span>
+                            </div>
+                        </div>
+                        <div class="col-6 text-sm">
+                            <div class="d-flex justify-content-between align-items-start px-2 mb-3">
+                                Min Values
+                                <span class="d-block badge bg-success ms-auto">27°</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start px-2">
+                                Max Values
+                                <span class="d-block badge bg-danger ms-auto">89°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

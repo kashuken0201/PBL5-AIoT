@@ -1,0 +1,47 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="row mb-2" style="margin-top: 10px;">
+        <div class="col-md-1 col-lg-1">
+            <img src="{% static '/images/icons8-student-64.png' %}" alt="" class="rounded-circle" style="width: auto;">   
+        </div>
+        <div class="col-md-11 col-lg-11 d-flex justify-content-between align-items-center">
+            <span class="h3">Students</span>
+        </div>
+    </div>
+    <div class="row">
+        <hr width="100%" align="center" size="5px" style="background-color: #CC00CC;"/>
+    </div>
+</div>
+<div class="row">
+    <div class="row mb-5" style="text-align: center;">
+        <span class="h3">Student Information</span>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="row mb-3">
+            <div class="col-md-1 col-lg-1"></div>
+            <div class="col-md-1 col-lg-1">
+                <label>{{ field.label }}</label>
+            </div>
+            <div class="col-md-8 col-lg-8">
+                {{ field }}
+            </div>
+            <div class="col-md-2 col-lg-2"></div>
+        </div>
+        {% endfor %}
+        <div class="row mb-3">
+            <div class="col-md-5 col-lg-5"></div>
+            <div class="col-md-1 col-lg-1">
+                <input class="btn btn-primary" type="submit" value="Save"/>
+            </div>
+            <div class="col-md-1 col-lg-1">
+                <a href="{% url 'student-list' %}" class="btn btn-danger">Cancel</a>
+            </div>
+            <div class="col-md-5 col-lg-5"></div>
+        </div> 
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+python recognizaton/src/recognizaton_server.py
+python recognizaton/src/train/face_train.py
+python recognizaton/src/train/split_data_train_val.py
+
+python manage.py runserver 8888
